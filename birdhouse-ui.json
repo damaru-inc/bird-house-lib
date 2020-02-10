@@ -1,0 +1,92 @@
+{
+  "components": {
+    "schemas": {
+      "pictureMessage": {
+        "description": "",
+        "title": "picture",
+        "type": "object",
+        "properties": {
+          "agentId": {
+            "type": "integer"
+          },
+          "picture": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string"
+          }
+        }
+      },
+      "heartbeatMessage": {
+        "description": "Birdhouse heartbeat",
+        "title": "heartbeat",
+        "properties": {
+          "agentId": {
+            "type": "integer"
+          },
+          "timestamp": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "messages": {
+      "preview": {
+        "payload": {
+          "$ref": "#/components/schemas/pictureMessage"
+        },
+        "description": "Preview pictures",
+        "schemaFormat": "application/vnd.aai.asyncapi+json;version=2.0.0",
+        "contentType": "application/json"
+      },
+      "heartbeat": {
+        "payload": {
+          "$ref": "#/components/schemas/heartbeatMessage"
+        },
+        "description": "",
+        "schemaFormat": "application/vnd.aai.asyncapi+json;version=2.0.0",
+        "contentType": "application/json"
+      },
+      "picture": {
+        "payload": {
+          "$ref": "#/components/schemas/pictureMessage"
+        },
+        "description": "High quality pictures",
+        "schemaFormat": "application/vnd.aai.asyncapi+json;version=2.0.0",
+        "contentType": "application/json"
+      }
+    }
+  },
+  "channels": {
+    "dickeycloud/birdhouse/picture/v1/1": {
+      "x-scs-function-name" : "picture",
+      "subscribe": {
+        "message": {
+          "$ref": "#/components/messages/picture"
+        }
+      }
+    },
+    "dickeycloud/birdhouse/agentHb/v1/1": {
+      "x-scs-function-name" : "heartbeat",
+      "subscribe": {
+        "message": {
+          "$ref": "#/components/messages/heartbeat"
+        }
+      }
+    },
+    "dickeycloud/birdhouse/previews/v1/1": {
+      "x-scs-function-name" : "preview",
+      "subscribe": {
+        "message": {
+          "$ref": "#/components/messages/preview"
+        }
+      }
+    }
+  },
+  "asyncapi": "2.0.0",
+  "info": {
+    "description": "The web app that displays the pictures.",
+    "title": "birdhouse-ui",
+    "version": "0.0.1"
+  }
+}

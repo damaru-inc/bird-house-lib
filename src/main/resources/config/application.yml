@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    stream:
+      function:
+        definition: pictureConsumer;heartbeatConsumer;previewConsumer;
+      bindings:
+        pictureConsumer-in-0:
+          destination: dickeycloud/birdhouse/picture/v1/1
+        heartbeatConsumer-in-0:
+          destination: dickeycloud/birdhouse/agentHb/v1/1
+        previewConsumer-in-0:
+          destination: dickeycloud/birdhouse/previews/v1/1
+
